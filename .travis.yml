@@ -1,7 +1,13 @@
-language: bash
+language: java
+jdk:
+  - oraclejdk11
 services: docker
 before_install:
-  - cd 15\ RestWithSpringBootUdemy\ Docker/
+  - sudo apt-get update
+  - cd 16\ RestWithSpringBootUdemy\ AWS/RestWithSpringBootUdemy/
+  - echo "Let's start Maven Package!"
+  - mvn clean package
+  - cd ..
   - echo "We are in the Docker folder!"
 script:
   - docker-compose build
@@ -10,7 +16,6 @@ before_deploy:
 deploy:
   provider: script
   script:
-    docker push leonardocasagrande/mysql-rest-with-spring-boot-udemy;
     docker push leonardocasagrande/rest-with-spring-boot-udemy;
   on:
     branch: master
